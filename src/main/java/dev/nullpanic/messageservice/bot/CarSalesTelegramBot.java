@@ -1,5 +1,6 @@
 package dev.nullpanic.messageservice.bot;
 
+import dev.nullpanic.messageservice.command.CommandContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,8 +15,11 @@ public class CarSalesTelegramBot extends TelegramLongPollingBot {
     @Value("${telegramBot.token}")
     private String token;
 
+    private final CommandContainer commandContainer;
+
     @Autowired
-    public CarSalesTelegramBot() {
+    public CarSalesTelegramBot(CommandContainer commandContainer) {
+        this.commandContainer = commandContainer;
     }
 
     @Override
@@ -34,8 +38,7 @@ public class CarSalesTelegramBot extends TelegramLongPollingBot {
             String message = update.getMessage().getText().trim();
             String commandIdentifier = message.split(" ")[0].toLowerCase();
 
-            //TODO делегировать выполнение комманд в commandContainer
-            System.out.println(commandIdentifier);
+            commandContainer.retrieveCommand(commandIdentifier).execute(update);
         }
     }
 }
