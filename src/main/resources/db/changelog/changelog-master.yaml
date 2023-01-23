@@ -4,3 +4,6 @@ databaseChangeLog:
   - include:
       file: v.0.1.0/cumulative-changelog.yml
       relativeToChangeLogFile: true
+  - include:
+      file: v.0.1.1/cumulative-changelog.yml
+      relativeToChangeLogFile: true

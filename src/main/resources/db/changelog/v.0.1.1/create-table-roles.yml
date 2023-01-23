@@ -1,0 +1,26 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: create-table-roles
+      author: nullpanic
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+        - createSequence:
+            sequenceName: ROLES_SEQ
+            incrementBy: 1
+            startValue: 1
+            minValue: 1
+            maxValue: 9223372036854775807
