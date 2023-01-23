@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"dev.nullpanic.messageservice.persist.repository"})
+@EnableJpaRepositories(basePackages = {"dev.nullpanic.messageservice.persist"})
 @EnableTransactionManagement
 public class PersistenceContext {
 
@@ -41,7 +41,7 @@ public class PersistenceContext {
 
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("dev.nullpanic.messageservice.persist.model");
+        entityManagerFactoryBean.setPackagesToScan("dev.nullpanic.messageservice.persist");
 
         entityManagerFactoryBean.setJpaProperties(getJpaProperties());
 
