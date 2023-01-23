@@ -1,0 +1,30 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: create-table-tg_user
+      author: nullpanic
+      changes:
+        - createTable:
+            tableName: tg_user
+            columns:
+              - column:
+                  name: chat_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
