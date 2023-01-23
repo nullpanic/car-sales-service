@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-user_roles
+      author: nullpanic
+      changes:
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_roles
+            constraintName: user_id_fk
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedTableName: tg_user
+            referencedColumnNames: chat_id
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: user_roles
+            constraintName: role_id_fk
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedTableName: roles
+            referencedColumnNames: role_id
+        - addPrimaryKey:
+            tableName: user_roles
+            columnNames: user_id, role_id
+
+
