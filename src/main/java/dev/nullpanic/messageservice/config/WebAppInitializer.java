@@ -23,5 +23,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic appServlet = servletContext.addServlet("mvc", new DispatcherServlet(new GenericWebApplicationContext()));
         appServlet.setLoadOnStartup(1);
         appServlet.addMapping("/");
+
     }
 }
