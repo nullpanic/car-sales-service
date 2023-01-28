@@ -8,27 +8,25 @@ import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-@Component
+
 public class LiquibaseStarter {
 
     @Value("${liquibase.change-log}")
-    String changeLogPath;
+    private String changeLogPath;
 
-    DataSource dataSource;
+    private final DataSource dataSource;
 
-    @Autowired
     public LiquibaseStarter(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    @Autowired
+    @PostConstruct
     public void startLiquibase() throws LiquibaseException, SQLException {
         java.sql.Connection connection = dataSource.getConnection();
 
@@ -37,4 +35,6 @@ public class LiquibaseStarter {
             liquibase.update(new Contexts(), new LabelExpression());
         }
     }
+
+
 }

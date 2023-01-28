@@ -9,7 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: chat_id
-                  type: BIGINT
+                  type: bigint
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -26,5 +26,6 @@ databaseChangeLog:
               - column:
                   name: last_name
                   type: varchar(128)
-                  constraints:
-                    nullable: false
+              - column:
+                  name: active
+                  type: boolean

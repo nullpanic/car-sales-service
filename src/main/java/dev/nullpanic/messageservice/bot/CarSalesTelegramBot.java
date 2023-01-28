@@ -5,7 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
+import javax.annotation.PostConstruct;
+
 
 @Component
 public class CarSalesTelegramBot extends TelegramLongPollingBot {
@@ -40,5 +46,11 @@ public class CarSalesTelegramBot extends TelegramLongPollingBot {
 
             commandContainer.retrieveCommand(commandIdentifier).execute(update);
         }
+    }
+
+    @PostConstruct
+    public void registerBot() throws TelegramApiException {
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+        telegramBotsApi.registerBot(this);
     }
 }

@@ -26,7 +26,10 @@ public class TelegramUser {
     private String firstName;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
+
+    @Column(name = "active")
+    private boolean active;
 
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
